@@ -1,5 +1,8 @@
 package com.example.demo;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -7,24 +10,26 @@ import org.springframework.boot.test.context.SpringBootTest;
 class RomanApplicationTests {
     @Test
     public void testA() {
-        assertEquals("I", convertToRomansString(1));
+        String roman= "I";
+        assertTrue(roman.equals(convertToRomansString(1)));
     }
 
     @Test
     public void testB() {
-        var x = assertThrows(RuntimeException.class,
-                () -> convertToRomansString(0));
-        assertTrue(x.getMessage().equals("Números menores a 1 no son válidos"));
+        var x = Assertions.assertThrows(RuntimeException.class,
+                () -> convertToRomansString(0),"Números menores a 1 no son válidos");
     }
 
     @Test
     public void testC() {
-        assertEquals("II", convertToRomansString(2));
+        String roman= "II";
+        assertTrue(roman.equals(convertToRomansString(2)));
     }
 
     @Test
     public void testD() {
-        assertEquals("III", convertToRomansString(3));
+        String roman= "III";
+        assertTrue(roman.equals(convertToRomansString(3)));
     }
 
     private String convertToRomansString(int i) {
