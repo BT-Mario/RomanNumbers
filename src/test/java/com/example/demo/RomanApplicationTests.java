@@ -1,4 +1,5 @@
 package com.example.demo;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -7,7 +8,7 @@ import org.junit.jupiter.api.Test;
 public class RomanApplicationTests {
 
     @Test
-    public void testA() {
+    public void testConvertUnits() {
         assertEquals("I", convertToRomansString(1));
         assertEquals("II", convertToRomansString(2));
         assertEquals("III", convertToRomansString(3));
@@ -20,21 +21,18 @@ public class RomanApplicationTests {
     }
 
     @Test
-    public void testB() {
-       assertThrows(RuntimeException.class,
-                () -> convertToRomansString(0),"Números menores a 1 no son válidos");
+    public void testLowerLimit() {
+        assertThrows(RuntimeException.class, () -> convertToRomansString(0), "Números menores a 1 no son válidos");
     }
 
-    
     @Test
-    public void testC() {
-       assertThrows(RuntimeException.class,
-                () -> convertToRomansString(4000),"Números mayores a 3999 no son válidos, Decorum no soportado");
+    public void testUpperLimit() {
+        assertThrows(RuntimeException.class, () -> convertToRomansString(4000),
+                "Números mayores a 3999 no son válidos, Decorum no soportado");
     }
-  
 
     @Test
-    public void testH() {
+    public void testConvertTenths() {
         assertEquals("XIV", convertToRomansString(14));
         assertEquals("XXVIII", convertToRomansString(28));
         assertEquals("XXXIII", convertToRomansString(33));
@@ -48,7 +46,7 @@ public class RomanApplicationTests {
     }
 
     @Test
-    public void testI() {
+    public void testConvertCenths() {
         assertEquals("CXIV", convertToRomansString(114));
         assertEquals("CCXXVIII", convertToRomansString(228));
         assertEquals("CCCXXXIII", convertToRomansString(333));
@@ -62,39 +60,40 @@ public class RomanApplicationTests {
     }
 
     @Test
-    public void testJ() {
+    public void testConvertThousanths() {
         assertEquals("MCXIV", convertToRomansString(1114));
         assertEquals("MMCCXXVIII", convertToRomansString(2228));
         assertEquals("MMMCCCXXXIII", convertToRomansString(3333));
         assertEquals("M", convertToRomansString(1000));
     }
 
-
     private String convertToRomansString(int aNumberToConvert) {
-        StringBuilder  romanString = new StringBuilder();
-        String  reversedDecimal = new StringBuilder( String.valueOf(aNumberToConvert)).reverse().toString();
         if (aNumberToConvert <= 0) {
             throw new RuntimeException("Números menores a 1 no son válidos");
         }
         if (aNumberToConvert > 3999) {
             throw new RuntimeException("Números mayores a 3999 no son válidos, Decorum no soportado");
         }
-        if (aNumberToConvert > 999){
-            romanString.append(convertThousanthToRomanString(Character.getNumericValue( reversedDecimal.charAt(3))));
+
+        StringBuilder romanString = new StringBuilder();
+        String reversedDecimal = new StringBuilder(String.valueOf(aNumberToConvert)).reverse().toString();
+
+        if (aNumberToConvert > 999) {
+            romanString.append(convertThousanthToRomanString(Character.getNumericValue(reversedDecimal.charAt(3))));
         }
-        if (aNumberToConvert > 99){
-            romanString.append(convertCenthToRomanString(Character.getNumericValue( reversedDecimal.charAt(2))));
+        if (aNumberToConvert > 99) {
+            romanString.append(convertCenthToRomanString(Character.getNumericValue(reversedDecimal.charAt(2))));
         }
-        if (aNumberToConvert > 9){
-            romanString.append(convertTenthToRomanString(Character.getNumericValue( reversedDecimal.charAt(1))));
+        if (aNumberToConvert > 9) {
+            romanString.append(convertTenthToRomanString(Character.getNumericValue(reversedDecimal.charAt(1))));
         }
         romanString.append(convertUnitToRomanString(Character.getNumericValue(reversedDecimal.charAt(0))));
         return romanString.toString();
 
     }
 
-    private String convertTenthToRomanString (int aNumberToConvert){
-        StringBuilder  romanString = new StringBuilder();
+    private String convertTenthToRomanString(int aNumberToConvert) {
+        StringBuilder romanString = new StringBuilder();
         if (aNumberToConvert <= 3) {
             for (int i = 0; i < aNumberToConvert; i++) {
                 romanString.append("X");
@@ -113,8 +112,8 @@ public class RomanApplicationTests {
 
     }
 
-    private String convertUnitToRomanString (int aNumberToConvert){
-        StringBuilder  romanString = new StringBuilder();
+    private String convertUnitToRomanString(int aNumberToConvert) {
+        StringBuilder romanString = new StringBuilder();
         if (aNumberToConvert <= 3) {
             for (int i = 0; i < aNumberToConvert; i++) {
                 romanString.append("I");
@@ -133,8 +132,8 @@ public class RomanApplicationTests {
 
     }
 
-    private String convertCenthToRomanString (int aNumberToConvert){
-        StringBuilder  romanString = new StringBuilder();
+    private String convertCenthToRomanString(int aNumberToConvert) {
+        StringBuilder romanString = new StringBuilder();
         if (aNumberToConvert <= 3) {
             for (int i = 0; i < aNumberToConvert; i++) {
                 romanString.append("C");
@@ -153,16 +152,14 @@ public class RomanApplicationTests {
 
     }
 
-    private String convertThousanthToRomanString (int aNumberToConvert){
-        StringBuilder  romanString = new StringBuilder();
+    private String convertThousanthToRomanString(int aNumberToConvert) {
+        StringBuilder romanString = new StringBuilder();
         if (aNumberToConvert <= 3) {
             for (int i = 0; i < aNumberToConvert; i++) {
                 romanString.append("M");
             }
-        } 
+        }
         return romanString.toString();
 
     }
 }
-
-
