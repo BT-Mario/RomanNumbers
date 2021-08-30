@@ -79,74 +79,21 @@ public class RomanApplicationTests {
         String reversedDecimal = new StringBuilder(String.valueOf(aNumberToConvert)).reverse().toString();
 
         if (aNumberToConvert > 999) {
-            romanString.append(convertThousanthToRomanString(Character.getNumericValue(reversedDecimal.charAt(3))));
+            String[] digits = { "", "M", "MM", "MMM" };
+            romanString.append(digits[Character.getNumericValue(reversedDecimal.charAt(3))]);
         }
         if (aNumberToConvert > 99) {
-            romanString.append(convertCenthToRomanString(Character.getNumericValue(reversedDecimal.charAt(2))));
+            String[] digits = { "", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM" };
+            romanString.append(digits[Character.getNumericValue(reversedDecimal.charAt(2))]);
         }
         if (aNumberToConvert > 9) {
-            romanString.append(convertTenthToRomanString(Character.getNumericValue(reversedDecimal.charAt(1))));
+            String[] digits = { "", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC" };
+            romanString.append(digits[Character.getNumericValue(reversedDecimal.charAt(1))]);
         }
-        romanString.append(convertUnitToRomanString(Character.getNumericValue(reversedDecimal.charAt(0))));
+        String[] digits = { "", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX" };
+        romanString.append(digits[Character.getNumericValue(reversedDecimal.charAt(0))]);
         return romanString.toString();
 
     }
 
-    private String convertTenthToRomanString(int aNumberToConvert) {
-        switch (aNumberToConvert){
-            case 1: return "X";
-            case 2: return "XX";
-            case 3: return "XXX";
-            case 4: return "XL";
-            case 5: return "L";
-            case 6: return "LX";
-            case 7: return "LXX";
-            case 8: return "LXXX";
-            case 9: return "XC";
-        }
-        return "";
-
-    }
-
-    private String convertUnitToRomanString(int aNumberToConvert) {
-        switch (aNumberToConvert){
-            case 1: return "I";
-            case 2: return "II";
-            case 3: return "III";
-            case 4: return "IV";
-            case 5: return "V";
-            case 6: return "VI";
-            case 7: return "VII";
-            case 8: return "VIII";
-            case 9: return "IX";
-        }
-        return "";
-
-    }
-
-    private String convertCenthToRomanString(int aNumberToConvert) {
-        switch (aNumberToConvert){
-            case 1: return "C";
-            case 2: return "CC";
-            case 3: return "CCC";
-            case 4: return "CD";
-            case 5: return "D";
-            case 6: return "DC";
-            case 7: return "DCC";
-            case 8: return "DCCC";
-            case 9: return "CM";
-        }
-        return "";
-
-    }
-
-    private String convertThousanthToRomanString(int aNumberToConvert) {
-        switch (aNumberToConvert){
-            case 1: return "M";
-            case 2: return "MM";
-            case 3: return "MMM";
-        }
-        return "";
-
-    }
 }
