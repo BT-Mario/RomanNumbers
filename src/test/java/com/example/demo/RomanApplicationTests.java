@@ -1,11 +1,9 @@
 package com.example.demo;
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 public class RomanApplicationTests {
 
@@ -18,9 +16,8 @@ public class RomanApplicationTests {
 
     @Test
     public void testB() {
-        var x = assertThrows(RuntimeException.class,
-                () -> convertToRomansString(0));
-        assertTrue(x.getMessage().equals("Números menores a 1 no son válidos"));
+       assertThrows(RuntimeException.class,
+                () -> convertToRomansString(0),"Números menores a 1 no son válidos");
     }
 
     @Test
